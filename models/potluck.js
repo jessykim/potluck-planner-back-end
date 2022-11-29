@@ -1,11 +1,12 @@
-import mongoose, { trusted } from "mongoose"
+import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
 
 const potluckSchema = new Schema({
   name: String,
   location: String,
-  description: String
+  description: String,
+  host: { type: Schema.Types.ObjectId, ref: 'Profile' }
 }, {
   timestamps: true
 })
