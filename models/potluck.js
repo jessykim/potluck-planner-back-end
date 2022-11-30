@@ -48,15 +48,15 @@ const potluckSchema = new Schema(
       type: Schema.Types.ObjectId, ref: 'Profile' 
     },
     rsvps: [RSVPSchema],
-    food: { 
+    food: [{ 
       type: Schema.Types.ObjectId, ref: 'Food' 
-    },
-    items: { 
+    }],
+    items: [{ 
       type: Schema.Types.ObjectId, ref: 'Item' 
-    },
-    drinks: { 
+    }],
+    drinks: [{ 
       type: Schema.Types.ObjectId, ref: 'Drink' 
-    },
+    }],
   }, 
   { timestamps: true }
 )
