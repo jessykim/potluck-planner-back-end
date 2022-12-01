@@ -40,8 +40,35 @@ const show = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    const potluck = await Potluck.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    ).populate('host')
+    res.status(200).json(potluck)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+const deletePotluck = async (req, res) => {
+  try {
+    const potluck = await Potluck.findByIdAndDelete(req.params.id)
+    const profile = await Profile.findById(req.user.profile)
+    profile.potlucks.remove({ _id: req.params.id })
+    await profile.save()
+    res.status(200).json(potluck)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
-  show
+  show,
+  update,
+  deletePotluck as delete
 }

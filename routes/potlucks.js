@@ -9,8 +9,14 @@ const router = Router()
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
+
 router.get('/', checkAuth, potlucksCtrl.index)
 router.get('/:id', checkAuth, potlucksCtrl.show)
+
 router.post('/', checkAuth, potlucksCtrl.create)
+
+router.put('/:id', checkAuth, potlucksCtrl.update)
+
+router.delete('/:id', checkAuth, potlucksCtrl.delete)
 
 export { router }
