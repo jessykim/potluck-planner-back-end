@@ -65,10 +65,23 @@ const deletePotluck = async (req, res) => {
   }
 }
 
+const createRsvp = async (req, res) => {
+  try {
+    req.body.guest = req.user.profile
+    const potluck = await Potluck.findById(req.params.id)
+    potluck.rsvps.push(req.body)
+    await potluck.save()
+    res.status(201).json(potluck)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
   show,
   update,
-  deletePotluck as delete
+  deletePotluck as delete,
+  createRsvp
 }

@@ -14,6 +14,7 @@ router.get('/', checkAuth, potlucksCtrl.index)
 router.get('/:id', checkAuth, potlucksCtrl.show)
 
 router.post('/', checkAuth, potlucksCtrl.create)
+router.post('/:id/rsvps', checkAuth, potlucksCtrl.createRsvp)
 
 router.put('/:id', checkAuth, potlucksCtrl.update)
 
