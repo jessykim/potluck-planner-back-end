@@ -11,11 +11,11 @@ const router = Router()
 router.use(decodeUserFromToken)
 
 router.get('/', checkAuth, potlucksCtrl.index)
-// router.get('/id/rsvps', checkAuth, potlucksCtrl.rsvpIndex)
 router.get('/:id', checkAuth, potlucksCtrl.show)
 
 router.post('/', checkAuth, potlucksCtrl.create)
 router.post('/:id/rsvps', checkAuth, potlucksCtrl.createRsvp)
+router.post('/:id/foods', checkAuth, potlucksCtrl.createFood)
 
 router.put('/:id', checkAuth, potlucksCtrl.update)
 
