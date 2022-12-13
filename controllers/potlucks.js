@@ -82,6 +82,20 @@ const createRsvp = async (req, res) => {
   }
 }
 
+const updateRsvp = async (req, res) => {
+  try {
+    const potluck = await Potluck.findById(req.params.potluckId)
+    const rsvp = potluck.rsvps.id(req.params.rsvpId)
+    rsvp.party = req.body.party
+    rsvp.notes = req.body.notes
+    rsvp.rsvp = req.body.rsvp
+    await potluck.save()
+    res.status(200).json(rsvp)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 const createFood = async (req, res) => {
   try {
     const food = await Food.create(req.body)
@@ -104,5 +118,6 @@ export {
   update,
   deletePotluck as delete,
   createRsvp,
-  createFood
+  updateRsvp,
+  createFood,
 }

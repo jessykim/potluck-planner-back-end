@@ -18,6 +18,7 @@ router.post('/:id/rsvps', checkAuth, potlucksCtrl.createRsvp)
 router.post('/:id/foods', checkAuth, potlucksCtrl.createFood)
 
 router.put('/:id', checkAuth, potlucksCtrl.update)
+router.put('/:potluckId/rsvps/:rsvpId', checkAuth, potlucksCtrl.updateRsvp)
 
 router.delete('/:id', checkAuth, potlucksCtrl.delete)
 
