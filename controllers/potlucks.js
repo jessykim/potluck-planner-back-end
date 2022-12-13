@@ -96,6 +96,17 @@ const updateRsvp = async (req, res) => {
   }
 }
 
+const deleteRsvp = async (req, res) => {
+  try {
+    const potluck = await Potluck.findById(req.params.potluckId)
+    potluck.rsvps.remove({ _id: req.params.rsvpId })
+    await potluck.save()
+    res.status(200).json(potluck)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 const createFood = async (req, res) => {
   try {
     const food = await Food.create(req.body)
@@ -119,5 +130,6 @@ export {
   deletePotluck as delete,
   createRsvp,
   updateRsvp,
+  deleteRsvp,
   createFood,
 }

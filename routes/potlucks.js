@@ -21,5 +21,6 @@ router.put('/:id', checkAuth, potlucksCtrl.update)
 router.put('/:potluckId/rsvps/:rsvpId', checkAuth, potlucksCtrl.updateRsvp)
 
 router.delete('/:id', checkAuth, potlucksCtrl.delete)
+router.delete('/:potluckId/rsvps/:rsvpId', checkAuth, potlucksCtrl.deleteRsvp)
 
 export { router }
