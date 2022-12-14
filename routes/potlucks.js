@@ -24,5 +24,6 @@ router.put('/:potluckId/foods/:foodId', checkAuth, potlucksCtrl.updateFood)
 
 router.delete('/:id', checkAuth, potlucksCtrl.delete)
 router.delete('/:potluckId/rsvps/:rsvpId', checkAuth, potlucksCtrl.deleteRsvp)
+router.delete('/:potluckId/foods/:foodId', checkAuth, potlucksCtrl.deleteFood)
 
 export { router }

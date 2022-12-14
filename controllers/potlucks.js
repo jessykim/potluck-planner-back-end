@@ -148,6 +148,19 @@ const updateFood = async (req, res) => {
   }
 }
 
+const deleteFood = async (req, res) => {
+  try {
+    const food = await Food.findByIdAndDelete(req.params.foodId)
+    const potluck = await Potluck.findById(req.params.potluckId)
+    potluck.foods.remove({ _id: req.params.foodId })
+    await potluck.save()
+    res.status(200).json(food)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -159,5 +172,6 @@ export {
   deleteRsvp,
   createFood,
   foodIndex,
-  updateFood
+  updateFood,
+  deleteFood
 }
