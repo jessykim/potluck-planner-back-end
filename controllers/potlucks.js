@@ -202,6 +202,19 @@ const updateDrink = async (req, res) => {
   }
 }
 
+const deleteDrink = async (req, res) => {
+  try {
+    const drink = await Drink.findByIdAndDelete(req.params.drinkId)
+    const potluck = await Potluck.findById(req.params.potluckId)
+    potluck.drinks.remove({ _id: req.params.drinkId })
+    await potluck.save()
+    res.status(200).json(drink)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -217,5 +230,6 @@ export {
   deleteFood,
   createDrink,
   drinkIndex,
-  updateDrink
+  updateDrink,
+  deleteDrink
 }

@@ -28,5 +28,6 @@ router.put('/:potluckId/drinks/:drinkId', checkAuth, potlucksCtrl.updateDrink)
 router.delete('/:id', checkAuth, potlucksCtrl.delete)
 router.delete('/:potluckId/rsvps/:rsvpId', checkAuth, potlucksCtrl.deleteRsvp)
 router.delete('/:potluckId/foods/:foodId', checkAuth, potlucksCtrl.deleteFood)
+router.delete('/:potluckId/drinks/:drinkId', checkAuth, potlucksCtrl.deleteDrink)
 
 export { router }
