@@ -7,6 +7,11 @@ const itemSchema = new Schema({
     type: String,
     required: true
   },
+  category: {
+    type: String,
+    enum: ['Bowls/Plates', 'Cups', 'Decorations', 'Utensils', 'Other'],
+    required: true
+  },
   notes: String,
   provider: { type: Schema.Types.ObjectId, ref: 'Profile'}
 },{
