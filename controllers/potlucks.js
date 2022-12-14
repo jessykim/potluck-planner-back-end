@@ -188,6 +188,20 @@ const drinkIndex = async (req, res) => {
   }
 }
 
+const updateDrink = async (req, res) => {
+  try {
+    const drink = await Drink.findByIdAndUpdate(
+      req.params.drinkId,
+      req.body,
+      { new: true }
+    )
+    res.status(200).json(drink)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -203,4 +217,5 @@ export {
   deleteFood,
   createDrink,
   drinkIndex,
+  updateDrink
 }

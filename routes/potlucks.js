@@ -23,6 +23,7 @@ router.post('/:id/drinks', checkAuth, potlucksCtrl.createDrink)
 router.put('/:id', checkAuth, potlucksCtrl.update)
 router.put('/:potluckId/rsvps/:rsvpId', checkAuth, potlucksCtrl.updateRsvp)
 router.put('/:potluckId/foods/:foodId', checkAuth, potlucksCtrl.updateFood)
+router.put('/:potluckId/drinks/:drinkId', checkAuth, potlucksCtrl.updateDrink)
 
 router.delete('/:id', checkAuth, potlucksCtrl.delete)
 router.delete('/:potluckId/rsvps/:rsvpId', checkAuth, potlucksCtrl.deleteRsvp)
