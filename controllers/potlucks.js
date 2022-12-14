@@ -125,10 +125,9 @@ const createFood = async (req, res) => {
 
 const foodIndex = async (req, res) => {
   try {
-    const foods = await Potluck.findById(req.params.id)
-    .populate('foods')
-    console.log(foods)
-    res.status(200).json(foods.foods)
+    const potluck = await Potluck.findById(req.params.id)
+      .populate('foods')
+    res.status(200).json(potluck.foods)
   } catch (error) {
     console.log(error)
     res.status(500).json(error)
@@ -178,6 +177,17 @@ const createDrink = async (req, res) => {
   }
 }
 
+const drinkIndex = async (req, res) => {
+  try {
+    const potluck = await Potluck.findById(req.params.id)
+      .populate('drinks')
+    res.status(200).json(potluck.drinks)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -192,4 +202,5 @@ export {
   updateFood,
   deleteFood,
   createDrink,
+  drinkIndex,
 }
