@@ -7,9 +7,9 @@ const drinkSchema = new Schema({
     type: String,
     required: true
   },
-  type: {
+  alcoholic: {
     type: Boolean,
-    required: true
+    default: false,
   },
   quantity: {
     type: String

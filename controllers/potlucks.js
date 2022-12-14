@@ -1,6 +1,7 @@
 import { Potluck } from "../models/potluck.js"
 import { Profile } from "../models/profile.js"
 import { Food } from "../models/food.js"
+import { Drink } from "../models/drink.js"
 
 const create = async (req, res) => {
   try {
@@ -161,6 +162,22 @@ const deleteFood = async (req, res) => {
   }
 }
 
+const createDrink = async (req, res) => {
+  try {
+    req.body.provider = req.user.profile
+    const drink = await Drink.create(req.body)
+    const potluck = await Potluck.findByIdAndUpdate(
+      req.params.id,
+      { $push: { drinks: drink }},
+      { new: true }
+    )
+    res.status(201).json(drink)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -173,5 +190,6 @@ export {
   createFood,
   foodIndex,
   updateFood,
-  deleteFood
+  deleteFood,
+  createDrink,
 }
