@@ -134,6 +134,20 @@ const foodIndex = async (req, res) => {
   }
 }
 
+const updateFood = async (req, res) => {
+  try {
+    const food = await Food.findByIdAndUpdate(
+      req.params.foodId,
+      req.body,
+      { new: true }
+    )
+    res.status(200).json(food)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -145,4 +159,5 @@ export {
   deleteRsvp,
   createFood,
   foodIndex,
+  updateFood
 }
