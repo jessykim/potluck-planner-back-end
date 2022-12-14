@@ -108,6 +108,7 @@ const deleteRsvp = async (req, res) => {
 
 const createFood = async (req, res) => {
   try {
+    req.body.provider = req.user.profile
     const food = await Food.create(req.body)
     const potluck = await Potluck.findByIdAndUpdate(
       req.params.id,
