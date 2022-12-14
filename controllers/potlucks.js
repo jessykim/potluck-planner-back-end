@@ -243,6 +243,20 @@ const itemIndex = async (req, res) => {
   }
 }
 
+const updateItem = async (req, res) => {
+  try {
+    const item = await Item.findByIdAndUpdate(
+      req.params.itemId,
+      req.body,
+      { new: true }
+    )
+    res.status(200).json(item)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -261,5 +275,6 @@ export {
   updateDrink,
   deleteDrink,
   createItem,
-  itemIndex
+  itemIndex,
+  updateItem
 }
