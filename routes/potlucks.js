@@ -14,6 +14,7 @@ router.get('/', checkAuth, potlucksCtrl.index)
 router.get('/:id', checkAuth, potlucksCtrl.show)
 router.get('/:id/foods', checkAuth, potlucksCtrl.foodIndex)
 router.get('/:id/drinks', checkAuth, potlucksCtrl.drinkIndex)
+router.get('/:id/items', checkAuth, potlucksCtrl.itemIndex)
 
 router.post('/', checkAuth, potlucksCtrl.create)
 router.post('/:id/rsvps', checkAuth, potlucksCtrl.createRsvp)

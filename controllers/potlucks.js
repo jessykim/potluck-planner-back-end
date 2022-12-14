@@ -232,6 +232,17 @@ const createItem = async (req, res) => {
   }
 }
 
+const itemIndex = async (req, res) => {
+  try {
+    const potluck = await Potluck.findById(req.params.id)
+      .populate('items')
+    res.status(200).json(potluck.items)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -249,5 +260,6 @@ export {
   drinkIndex,
   updateDrink,
   deleteDrink,
-  createItem
+  createItem,
+  itemIndex
 }
