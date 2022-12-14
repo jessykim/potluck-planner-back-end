@@ -33,7 +33,6 @@ const index = async (req, res) => {
 const show = async (req, res) => {
   try {
     const potluck = await Potluck.findById(req.params.id)
-      // .populate('host', 'food', 'items', 'drinks', 'rsvps.guest')
       .populate('host')
     res.status(200).json(potluck)
   } catch (error) {
@@ -122,6 +121,18 @@ const createFood = async (req, res) => {
   }
 }
 
+const foodIndex = async (req, res) => {
+  try {
+    const foods = await Potluck.findById(req.params.id)
+    .populate('foods')
+    console.log(foods)
+    res.status(200).json(foods.foods)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -132,4 +143,5 @@ export {
   updateRsvp,
   deleteRsvp,
   createFood,
+  foodIndex,
 }
