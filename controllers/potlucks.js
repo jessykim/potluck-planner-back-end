@@ -257,6 +257,19 @@ const updateItem = async (req, res) => {
   }
 }
 
+const deleteItem = async (req, res) => {
+  try {
+    const item = await Item.findByIdAndDelete(req.params.itemId)
+    const potluck = await Potluck.findById(req.params.potluckId)
+    potluck.items.remove({ _id: req.params.itemId })
+    await potluck.save()
+    res.status(200).json(item)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -276,5 +289,6 @@ export {
   deleteDrink,
   createItem,
   itemIndex,
-  updateItem
+  updateItem,
+  deleteItem
 }
