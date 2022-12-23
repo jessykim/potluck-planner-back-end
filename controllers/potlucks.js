@@ -127,7 +127,12 @@ const createFood = async (req, res) => {
 const foodIndex = async (req, res) => {
   try {
     const potluck = await Potluck.findById(req.params.id)
-      .populate('foods')
+      .populate({
+        path : 'foods',
+        populate : {
+          path: 'provider'
+        }
+      })
     res.status(200).json(potluck.foods)
   } catch (error) {
     console.log(error)
@@ -290,5 +295,5 @@ export {
   createItem,
   itemIndex,
   updateItem,
-  deleteItem
+  deleteItem,
 }
