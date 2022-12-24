@@ -117,7 +117,10 @@ const createFood = async (req, res) => {
       { $push: { foods: food }},
       { new: true }
     )
-    res.status(201).json(food)
+    food.populate('provider')
+    .then(() => {
+      res.status(201).json(food)
+    })
   } catch (error) {
     console.log(error)
     res.status(500).json(error)
