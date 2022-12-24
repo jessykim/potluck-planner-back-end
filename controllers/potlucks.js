@@ -36,6 +36,12 @@ const show = async (req, res) => {
   try {
     const potluck = await Potluck.findById(req.params.id)
       .populate('host')
+      .populate({
+        path: 'rsvps',
+        populate: {
+          path: 'guest'
+        }
+      })
     res.status(200).json(potluck)
   } catch (error) {
     console.log(error)
@@ -73,6 +79,12 @@ const createRsvp = async (req, res) => {
     req.body.guest = req.user.profile
     const potluck = await Potluck.findById(req.params.id)
     potluck.rsvps.push(req.body)
+    potluck.populate({
+      path: 'rsvps',
+      populate: {
+        path: 'guest'
+      }
+    })
     await potluck.save()
 
     const newRsvp = potluck.rsvps[potluck.rsvps.length - 1]
@@ -131,8 +143,8 @@ const foodIndex = async (req, res) => {
   try {
     const potluck = await Potluck.findById(req.params.id)
       .populate({
-        path : 'foods',
-        populate : {
+        path: 'foods',
+        populate: {
           path: 'provider'
         }
       })
