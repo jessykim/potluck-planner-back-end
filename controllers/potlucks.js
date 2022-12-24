@@ -191,7 +191,10 @@ const createDrink = async (req, res) => {
       { $push: { drinks: drink }},
       { new: true }
     )
-    res.status(201).json(drink)
+    drink.populate('provider')
+    .then(() => {
+      res.status(201).json(drink)
+    })
   } catch (error) {
     console.log(error)
     res.status(500).json(error)
@@ -201,7 +204,12 @@ const createDrink = async (req, res) => {
 const drinkIndex = async (req, res) => {
   try {
     const potluck = await Potluck.findById(req.params.id)
-      .populate('drinks')
+      .populate({
+        path: 'drinks',
+        populate: {
+          path: 'provider'
+        }
+      })
     res.status(200).json(potluck.drinks)
   } catch (error) {
     console.log(error)
