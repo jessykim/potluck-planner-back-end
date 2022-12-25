@@ -10,6 +10,17 @@ function index(req, res) {
   })
 }
 
+const show = async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.id)
+      .populate('potlucks')
+    res.status(200).json(profile)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
@@ -29,4 +40,8 @@ function addPhoto(req, res) {
   })
 }
 
-export { index, addPhoto }
+export { 
+  index, 
+  show,
+  addPhoto 
+}
