@@ -4,6 +4,16 @@ const Schema = mongoose.Schema
 
 const profileSchema = new Schema({
   name: String,
+  // photo: {
+  //   public_id: {
+  //     type: String,
+  //     required: true
+  //   },
+  //   url: {
+  //     type: String,
+  //     required: true
+  //   }
+  // },
   photo: String,
   allergies: String,
   dietpref: {
